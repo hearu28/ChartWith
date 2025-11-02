@@ -10,6 +10,7 @@ import "@coinbase/onchainkit/styles.css";
 import "./styles/globals.css";
 
 import App from "./App";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 // Create a React Query client instance
 const queryClient = new QueryClient();
@@ -25,28 +26,42 @@ if (!onchainKitApiKey) {
   );
 }
 
+// OnchainKitProvider config - apiKey is optional, but some features require it
+const providerConfig: {
+  chain: typeof base;
+  config: {
+    appearance: { mode: "dark" };
+    wallet: { display: "modal"; preference: "all" };
+  };
+  apiKey?: string;
+} = {
+  chain: base,
+  config: {
+    appearance: {
+      mode: "dark",
+    },
+    wallet: {
+      display: "modal",
+      preference: "all",
+    },
+  },
+};
+
+// Only add apiKey if it exists
+if (onchainKitApiKey) {
+  providerConfig.apiKey = onchainKitApiKey;
+}
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    {/* OnchainKitProvider internally manages Wagmi and React Query  */}
-    <OnchainKitProvider
-      apiKey={onchainKitApiKey || undefined}
-      chain={base} // Set the PoC's target chain to Base
-      config={{
-        // Theme settings for OCK components
-        appearance: {
-          mode: "dark", // 'light', 'dark', 'auto'
-        },
-        // Wallet connection settings
-        wallet: {
-          display: "modal", // 'modal' | 'drawer'
-          preference: "all", // 'all' | 'smartWalletOnly' | 'eoaOnly'
-        },
-      }}
-    >
-      {/* OnchainKitProvider requires a QueryClientProvider */}
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </OnchainKitProvider>
+    <ErrorBoundary>
+      {/* OnchainKitProvider internally manages Wagmi and React Query  */}
+      <OnchainKitProvider {...providerConfig}>
+        {/* OnchainKitProvider requires a QueryClientProvider */}
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </OnchainKitProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );

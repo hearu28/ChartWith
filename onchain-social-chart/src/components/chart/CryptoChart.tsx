@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { createChart, ColorType } from "lightweight-charts";
+import { createChart, ColorType, LineSeries } from "lightweight-charts";
 import type { IChartApi, ISeriesApi } from "lightweight-charts";
 
 // Mock data for PoC
@@ -35,11 +35,14 @@ export function CryptoChart() {
     });
 
     // Create line series
-    // @ts-expect-error - lightweight-charts v5 API: addSeries accepts string or SeriesDefinition
-    const lineSeries = chart.addSeries("Line", {
+    // lightweight-charts v5 API - pass LineSeries directly
+    const lineSeries = chart.addSeries(LineSeries) as ISeriesApi<"Line">;
+
+    // Apply options to the series
+    lineSeries.applyOptions({
       color: "#3b82f6",
       lineWidth: 2,
-    }) as ISeriesApi<"Line">;
+    });
 
     // Set data
     lineSeries.setData(lineData);
