@@ -1,0 +1,27 @@
+{
+  "name": "onchain-social-chart",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.7"
+  },
+  "dependencies": {
+    "@coinbase/onchainkit": "^1.1.2",
+    "@tanstack/react-query": "^5.90.6",
+    "lightweight-charts": "^5.0.9",
+    "lightweight-charts-react-wrapper": "^2.1.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "viem": "^2.38.6",
+    "wagmi": "^2.19.2"
+  }
+}

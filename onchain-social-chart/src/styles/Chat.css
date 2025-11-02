@@ -1,0 +1,134 @@
+.social-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    to top,
+    rgba(26, 26, 26, 0.95) 0%,
+    rgba(26, 26, 26, 0.7) 70%,
+    transparent 100%
+  );
+  padding: 1rem;
+  max-height: 50%;
+  z-index: 10;
+}
+
+.chat-message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  max-height: 300px;
+  padding-right: 0.5rem;
+}
+
+.chat-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: rgba(42, 42, 42, 0.8);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.chat-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.chat-user-details {
+  display: flex;
+  align-items: center;
+}
+
+.chat-user-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #3b82f6;
+}
+
+.chat-message-text {
+  flex: 1;
+  font-size: 0.9375rem;
+  color: #e5e5e5;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.chat-input-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.chat-input-form input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background-color: rgba(42, 42, 42, 0.9);
+  border: 1px solid #3a3a3a;
+  border-radius: 0.5rem;
+  color: #e5e5e5;
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input-form input:focus {
+  border-color: #3b82f6;
+}
+
+.chat-input-form input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chat-input-form input::placeholder {
+  color: #888;
+}
+
+.chat-input-form button {
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-input-form button:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.chat-input-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Scrollbar styling for chat message list */
+.chat-message-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-message-list::-webkit-scrollbar-track {
+  background: rgba(42, 42, 42, 0.5);
+  border-radius: 3px;
+}
+
+.chat-message-list::-webkit-scrollbar-thumb {
+  background: rgba(107, 114, 128, 0.5);
+  border-radius: 3px;
+}
+
+.chat-message-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.7);
+}
