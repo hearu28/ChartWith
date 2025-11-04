@@ -24,9 +24,12 @@ export function Header({ timeFrame, onTimeFrameChange }: HeaderProps) {
           value={timeFrame}
           onChange={(e) => onTimeFrameChange(e.target.value as TimeFrame)}
         >
-          <option value="1d">1day</option>
-          <option value="15m">15min</option>
-          <option value="5m">5min</option>
+          <option value="1m">1분봉</option>
+          <option value="5m">5분봉</option>
+          <option value="15m">15분봉</option>
+          <option value="1h">1시간봉</option>
+          <option value="4h">4시간봉</option>
+          <option value="1d">1일봉</option>
         </select>
 
         {/* 
