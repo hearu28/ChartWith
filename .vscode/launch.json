@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Chrome",
+        "request": "launch",
+        "type": "chrome",
+        "url": "http://localhost:5173",
+        "webRoot": "${workspaceFolder}/onchain-social-chart",
+        "sourceMaps": true,
+        "runtimeExecutable": "${workspaceFolder}/onchain-social-chart/node_modules/.bin/vite",
+        "runtimeArgs": ["dev"]
+      },
+      {
+        "name": "Attach to Chrome",
+        "port": 9222,
+        "request": "attach",
+        "type": "chrome",
+        "url": "http://localhost:5173",
+        "webRoot": "${workspaceFolder}/onchain-social-chart",
+        "sourceMaps": true
+      }
+    ]
+  }
