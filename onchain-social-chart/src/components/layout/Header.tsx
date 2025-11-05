@@ -7,6 +7,7 @@ import {
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
 import "../../styles/Layout.css"; // Includes header styles
 import type { TimeFrame } from "../chart/CryptoChart";
+import { PriceInfo } from "./PriceInfo";
 
 interface HeaderProps {
   timeFrame: TimeFrame;
@@ -16,22 +17,31 @@ interface HeaderProps {
 export function Header({ timeFrame, onTimeFrameChange }: HeaderProps) {
   return (
     <header className="app-header">
-      <h1>Onchain Social Chart (PoC)</h1>
-      <div className="header-controls">
-        {/* 시간 프레임 선택 */}
-        <select
-          className="timeframe-select"
-          value={timeFrame}
-          onChange={(e) => onTimeFrameChange(e.target.value as TimeFrame)}
-        >
-          <option value="1m">1분봉</option>
-          <option value="5m">5분봉</option>
-          <option value="15m">15분봉</option>
-          <option value="1h">1시간봉</option>
-          <option value="4h">4시간봉</option>
-          <option value="1d">1일봉</option>
-        </select>
-
+      <div className="header-left">
+        <PriceInfo />
+      </div>
+      <div className="header-right">
+        <div className="timeframe-buttons">
+          {(["1m", "5m", "15m", "1h", "4h", "1d"] as TimeFrame[]).map((tf) => (
+            <button
+              key={tf}
+              className={`timeframe-button ${timeFrame === tf ? "active" : ""}`}
+              onClick={() => onTimeFrameChange(tf)}
+            >
+              {tf === "1m"
+                ? "1M"
+                : tf === "5m"
+                ? "5M"
+                : tf === "15m"
+                ? "15M"
+                : tf === "1h"
+                ? "1H"
+                : tf === "4h"
+                ? "4H"
+                : "1D"}
+            </button>
+          ))}
+        </div>
         {/* 
           Use OnchainKit's Wallet component.
           <Wallet> is the container that manages the connect button and dropdown menu.

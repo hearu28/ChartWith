@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #f5f5f5;
 }
 
 .app-header {
@@ -9,47 +10,423 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #1a1a1a;
-  border-bottom: 1px solid #2a2a2a;
-}
-
-.app-header h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0;
-}
-
-.header-controls {
-  display: flex;
-  align-items: center;
+  background-color: #ffffff;
+  border: 5px solid #000000;
+  border-bottom: 5px solid #000000;
+  box-shadow: 0 8px 0px 0px #000000;
+  position: relative;
+  z-index: 1000;
+  min-height: 70px;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
-.timeframe-select {
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* 가격 정보 스타일 */
+.price-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: #000000;
+  flex-wrap: wrap;
+  min-width: 0;
+  background-color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border: 4px solid #000000;
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+.price-symbol {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #000000;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.price-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.price-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.price-change {
+  font-size: 1rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.price-change.positive {
+  color: #00ff00;
+}
+
+.price-change.negative {
+  color: #ff0000;
+}
+
+.price-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  color: #000000;
+  flex-wrap: wrap;
+  font-weight: 700;
+}
+
+.price-stats .stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.price-stats .stat-item strong {
+  color: #000000;
+  font-weight: 900;
+}
+
+.price-loading {
+  color: #888888;
+  font-size: 0.875rem;
+}
+
+/* 타임프레임 버튼 그룹 */
+.timeframe-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.timeframe-button {
   padding: 0.5rem 1rem;
-  background-color: rgba(42, 42, 42, 0.9);
-  border: 1px solid #3a3a3a;
-  border-radius: 0.5rem;
-  color: #e5e5e5;
-  font-size: 0.9375rem;
-  outline: none;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border: 3px solid #000000;
+  border-radius: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: all 0.1s ease;
+  box-shadow: 3px 3px 0px 0px #000000;
+  text-transform: uppercase;
 }
 
-.timeframe-select:hover {
-  border-color: #3b82f6;
+.timeframe-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px 0px #000000;
+  background-color: #2a2a2a;
 }
 
-.timeframe-select:focus {
-  border-color: #3b82f6;
+.timeframe-button.active {
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: 3px 3px 0px 0px #000000;
+}
+
+.timeframe-button.active:hover {
+  box-shadow: 5px 5px 0px 0px #000000;
+}
+
+/* OnchainKit Wallet 버튼 스타일 */
+.header-right button,
+.header-right [role="button"],
+.header-right > div > button {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 4px solid #000000 !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 1rem !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  box-shadow: 4px 4px 0px 0px #000000 !important;
+  transition: all 0.1s ease !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+}
+
+.header-right button:hover,
+.header-right [role="button"]:hover,
+.header-right > div > button:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px 0px #000000 !important;
+}
+
+.header-right button:active,
+.header-right [role="button"]:active,
+.header-right > div > button:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 2px 2px 0px 0px #000000 !important;
+}
+
+/* OnchainKit Wallet 드롭다운 메뉴 스타일 */
+[data-radix-dropdown-menu-content],
+[data-radix-popper-content-wrapper] {
+  z-index: 1002 !important;
+}
+
+[data-radix-dropdown-menu-content] {
+  background-color: #ffffff !important;
+  border: 5px solid #000000 !important;
+  border-radius: 0 !important;
+  box-shadow: 8px 8px 0px 0px #000000 !important;
+  padding: 0.5rem !important;
+  min-width: 200px !important;
+}
+
+[data-radix-dropdown-menu-item],
+[data-radix-dropdown-menu-content] button {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1rem !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: all 0.1s ease !important;
+  box-shadow: 3px 3px 0px 0px #000000 !important;
+  font-family: inherit !important;
+  width: 100% !important;
+  text-align: left !important;
+}
+
+[data-radix-dropdown-menu-item]:hover,
+[data-radix-dropdown-menu-content] button:hover {
+  background-color: #ffff00 !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 5px 5px 0px 0px #000000 !important;
+}
+
+[data-radix-dropdown-menu-item]:last-child,
+[data-radix-dropdown-menu-content] button:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* OnchainKit 모달 스타일 (월렛 연결 팝업) */
+[data-radix-dialog-overlay] {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+[data-radix-dialog-content] {
+  background-color: #ffffff !important;
+  border: 5px solid #000000 !important;
+  border-radius: 0 !important;
+  box-shadow: 12px 12px 0px 0px #000000 !important;
+  padding: 2rem !important;
+  padding-top: 3.5rem !important;
+  max-width: 500px !important;
+  width: 90% !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 1rem !important;
+}
+
+/* 모달 닫기 버튼 스타일 */
+[data-radix-dialog-content] button[aria-label*="close"],
+[data-radix-dialog-content] button[aria-label*="Close"],
+[data-radix-dialog-content] [class*="close"],
+[data-radix-dialog-content] [class*="Close"],
+div[role="dialog"] button[aria-label*="close"],
+div[role="dialog"] button[aria-label*="Close"],
+[data-radix-dialog-content] button[aria-label*="Dismiss"],
+div[role="dialog"] button[aria-label*="Dismiss"] {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
+  border: 4px solid #000000 !important;
+  border-radius: 0 !important;
+  font-size: 1.5rem !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+  box-shadow: 4px 4px 0px 0px #000000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  z-index: 10001 !important;
+  flex-shrink: 0 !important;
+}
+
+[data-radix-dialog-content] button[aria-label*="close"]:hover,
+[data-radix-dialog-content] button[aria-label*="Close"]:hover,
+[data-radix-dialog-content] [class*="close"]:hover,
+[data-radix-dialog-content] [class*="Close"]:hover,
+div[role="dialog"] button[aria-label*="close"]:hover,
+div[role="dialog"] button[aria-label*="Close"]:hover,
+[data-radix-dialog-content] button[aria-label*="Dismiss"]:hover,
+div[role="dialog"] button[aria-label*="Dismiss"]:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px 0px #000000 !important;
+  background-color: #ff3333 !important;
+}
+
+[data-radix-dialog-content] h2,
+[data-radix-dialog-content] h3,
+div[role="dialog"] h2,
+div[role="dialog"] h3,
+div[class*="modal-content"] h2,
+div[class*="modal-content"] h3 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  font-size: 1.5rem !important;
+  margin: 0 0 1.5rem 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* OnchainKit 월렛 옵션 버튼들 */
+[data-radix-dialog-content] > div,
+div[role="dialog"] > div,
+[data-radix-dialog-content] [class*="wallet-options"],
+div[role="dialog"] [class*="wallet-options"],
+[data-radix-dialog-content]
+  > *:not(button[aria-label*="close"]):not(button[aria-label*="Close"]):not(
+    button[aria-label*="Dismiss"]
+  ),
+div[role="dialog"]
+  > *:not(button[aria-label*="close"]):not(button[aria-label*="Close"]):not(
+    button[aria-label*="Dismiss"]
+  ) {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+}
+
+[data-radix-dialog-content]
+  button:not([aria-label*="close"]):not([aria-label*="Close"]):not(
+    [aria-label*="Dismiss"]
+  ),
+div[role="dialog"]
+  button:not([aria-label*="close"]):not([aria-label*="Close"]):not(
+    [aria-label*="Dismiss"]
+  ),
+div[class*="modal-content"]
+  button:not([aria-label*="close"]):not([aria-label*="Close"]):not(
+    [aria-label*="Dismiss"]
+  ),
+div[class*="wallet-option"],
+div[class*="WalletOption"] button {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 4px solid #000000 !important;
+  border-radius: 0 !important;
+  padding: 1rem 1.5rem !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  box-shadow: 4px 4px 0px 0px #000000 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  transition: all 0.1s ease !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+[data-radix-dialog-content]
+  button:not([aria-label*="close"]):not([aria-label*="Close"]):not(
+    [aria-label*="Dismiss"]
+  ):hover,
+div[role="dialog"]
+  button:not([aria-label*="close"]):not([aria-label*="Close"]):not(
+    [aria-label*="Dismiss"]
+  ):hover,
+div[class*="modal-content"]
+  button:not([aria-label*="close"]):not([aria-label*="Close"]):not(
+    [aria-label*="Dismiss"]
+  ):hover,
+div[class*="wallet-option"]:hover,
+div[class*="WalletOption"] button:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px 0px #000000 !important;
+  background-color: #000000 !important;
+}
+
+[data-radix-dialog-content]
+  button:not([aria-label*="close"]):not([aria-label*="Close"]):not(
+    [aria-label*="Dismiss"]
+  ):active,
+div[role="dialog"]
+  button:not([aria-label*="close"]):not([aria-label*="Close"]):not(
+    [aria-label*="Dismiss"]
+  ):active,
+div[class*="modal-content"]
+  button:not([aria-label*="close"]):not([aria-label*="Close"]):not(
+    [aria-label*="Dismiss"]
+  ):active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 2px 2px 0px 0px #000000 !important;
+}
+
+/* Avatar 및 Name 스타일 */
+.header-right img,
+.header-right [class*="avatar"],
+.header-right button img {
+  border: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  box-shadow: 3px 3px 0px 0px #000000 !important;
+}
+
+.header-right span[class*="name"],
+.header-right div[class*="name"],
+.header-right button span[class*="name"],
+.header-right button div[class*="name"] {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
 }
 
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  background-color: #f5f5f5;
 }
 
 .chart-social-wrapper {
@@ -57,10 +434,13 @@
   flex: 1;
   width: 100%;
   height: 100%;
+  border: 5px solid #000000;
+  margin: 1rem;
+  box-shadow: 8px 8px 0px 0px #000000;
+  background-color: #ffffff;
 }
 
 .chart-container {
   width: 100%;
   height: 100%;
 }
-

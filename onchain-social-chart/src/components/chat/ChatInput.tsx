@@ -7,17 +7,43 @@ interface ChatInputProps {
   onCancel: () => void;
 }
 
-export function ChatInput({ onSendMessage, position, onCancel }: ChatInputProps) {
+export function ChatInput({
+  onSendMessage,
+  position,
+  onCancel,
+}: ChatInputProps) {
   const [text, setText] = useState("");
   const inputRef = useRef<HTMLDivElement>(null);
   const { address, isConnected } = useAccount();
 
-  // 입력창을 클릭한 위치에 정확히 배치
+  // 입력창을 클릭한 위치에 정확히 배치 (화면 경계 체크)
   useEffect(() => {
     if (inputRef.current) {
-      const rect = inputRef.current.getBoundingClientRect();
-      inputRef.current.style.left = `${position.x}px`;
-      inputRef.current.style.top = `${position.y}px`;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const formWidth = 500; // 대략적인 폼 너비
+      const formHeight = 80; // 대략적인 폼 높이
+
+      // X 위치 조정 (오른쪽 경계 체크)
+      let x = position.x;
+      if (x + formWidth > viewportWidth - 20) {
+        x = viewportWidth - formWidth - 20;
+      }
+      if (x < 20) {
+        x = 20;
+      }
+
+      // Y 위치 조정 (아래쪽 경계 체크)
+      let y = position.y;
+      if (y + formHeight > viewportHeight - 20) {
+        y = viewportHeight - formHeight - 20;
+      }
+      if (y < 20) {
+        y = 20;
+      }
+
+      inputRef.current.style.left = `${x}px`;
+      inputRef.current.style.top = `${y}px`;
     }
   }, [position]);
 
@@ -59,8 +85,8 @@ export function ChatInput({ onSendMessage, position, onCancel }: ChatInputProps)
   }
 
   return (
-    <div 
-      ref={inputRef} 
+    <div
+      ref={inputRef}
       className="chat-input-container"
       onClick={(e) => e.stopPropagation()}
     >

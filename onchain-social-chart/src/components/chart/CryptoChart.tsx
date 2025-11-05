@@ -139,12 +139,12 @@ export function CryptoChart({ timeFrame }: CryptoChartProps) {
       // Create chart
       const chart = createChart(chartContainerRef.current, {
         layout: {
-          background: { type: ColorType.Solid, color: "#1a1a1a" },
-          textColor: "#d1d5db",
+          background: { type: ColorType.Solid, color: "#ffffff" },
+          textColor: "#000000",
         },
         grid: {
-          vertLines: { color: "#2a2a2a" },
-          horzLines: { color: "#2a2a2a" },
+          vertLines: { color: "#e0e0e0", style: 0 },
+          horzLines: { color: "#e0e0e0", style: 0 },
         },
         width: chartContainerRef.current.clientWidth,
         height: chartContainerRef.current.clientHeight,
@@ -161,11 +161,13 @@ export function CryptoChart({ timeFrame }: CryptoChartProps) {
 
       // Apply options to the series
       candlestickSeries.applyOptions({
-        upColor: "#26a69a",
-        downColor: "#ef5350",
-        borderVisible: false,
-        wickUpColor: "#26a69a",
-        wickDownColor: "#ef5350",
+        upColor: "#00ff00",
+        downColor: "#ff0000",
+        borderVisible: true,
+        borderUpColor: "#000000",
+        borderDownColor: "#000000",
+        wickUpColor: "#000000",
+        wickDownColor: "#000000",
       });
 
       // Set data
@@ -246,7 +248,15 @@ export function CryptoChart({ timeFrame }: CryptoChartProps) {
             justifyContent: "center",
             alignItems: "center",
             height: "100%",
-            color: "#d1d5db",
+            backgroundColor: "#ffffff",
+            color: "#000000",
+            fontSize: "1.5rem",
+            fontWeight: 900,
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            border: "5px solid #000000",
+            margin: "2rem",
+            boxShadow: "8px 8px 0px 0px #000000",
           }}
         >
           Loading BTCUSDT.P chart ({timeFrame})...
@@ -259,7 +269,15 @@ export function CryptoChart({ timeFrame }: CryptoChartProps) {
             justifyContent: "center",
             alignItems: "center",
             height: "100%",
-            color: "#ef4444",
+            backgroundColor: "#ff0000",
+            color: "#ffffff",
+            fontSize: "1.5rem",
+            fontWeight: 900,
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            border: "5px solid #000000",
+            margin: "2rem",
+            boxShadow: "8px 8px 0px 0px #000000",
           }}
         >
           Error loading chart data. Please try again later.
