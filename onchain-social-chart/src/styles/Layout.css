@@ -143,13 +143,15 @@
 }
 
 .timeframe-button.active {
-  background-color: #ffffff;
-  color: #000000;
-  box-shadow: 3px 3px 0px 0px #000000;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  box-shadow: 3px 3px 0px 0px #000000 !important;
 }
 
 .timeframe-button.active:hover {
-  box-shadow: 5px 5px 0px 0px #000000;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  box-shadow: 5px 5px 0px 0px #000000 !important;
 }
 
 /* OnchainKit Wallet 버튼 스타일 */
@@ -187,8 +189,9 @@
 
 /* OnchainKit Wallet 드롭다운 메뉴 스타일 */
 [data-radix-dropdown-menu-content],
-[data-radix-popper-content-wrapper] {
-  z-index: 1002 !important;
+[data-radix-popper-content-wrapper],
+[data-radix-dropdown-menu-portal] {
+  z-index: 10003 !important;
 }
 
 [data-radix-dropdown-menu-content] {
