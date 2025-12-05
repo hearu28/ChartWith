@@ -1,0 +1,27 @@
+[profile.default]
+# Solidity 소스 / 테스트 / 스크립트 위치를 contracts 아래로 지정
+src = "contracts/src"
+test = "contracts/test"
+script = "contracts/script"
+
+# 출력 및 캐시 디렉토리도 contracts 아래로 모으기
+out = "contracts/out"
+libs = ["contracts/lib"]
+cache_path = "contracts/cache"
+broadcast = "contracts/broadcast"
+
+solc_version = "0.8.26"   # 사용할 솔리디티 버전 명시 (프로젝트에 맞게 조정)
+evm_version = "paris"
+
+# 옵션: 기본 네트워크들 (원하면 나중에 채우기)
+[rpc_endpoints]
+anvil = "http://127.0.0.1:8545"
+
+[etherscan]
+# 예: BASESCAN_API_KEY = "..."를 .env에 두고 여기에 참조할 수도 있음
+# base = { key = "${BASESCAN_API_KEY}", url = "https://api.basescan.org/api" }
+
+[fmt]
+line_length = 100
+tab_width = 4
+bracket_spacing = true
